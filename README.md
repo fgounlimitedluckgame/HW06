@@ -27,6 +27,8 @@
 | FR-15 | 40 (35 + 5) | 15 | 25 |
 | **Tổng** | **120** | **39** | **81** |
 
+* Số API đã test: 3 (`/api/register`, `/api/cart`, `/api/categories`)
+
 * Số lượng bug phát hiện: 7 (xem chi tiết bug tại [bug_report.md](bug_report.md))
 
 ---
