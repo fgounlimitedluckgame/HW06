@@ -1,3 +1,0 @@
-﻿test_id,category,method,endpoint,payload,expected_status,schema_validation,,assertion_script
-FR01-PT-001,Partition,POST,/api/register,"{""name"": ""Nguyen Van A"", ""email"": ""valid@domain.com"", ""password"": ""Password123!""}",200,"{""message"": ""string"", ""id"": ""number""}",,
-FR01-PT-002,Partition,POST,/api/register,"{""name"": ""A"", ""email"": ""valid2@domain.com"", ""password"": ""Password123!""}",200,"{""message"": ""string"", ""id"": ""number""}",,
