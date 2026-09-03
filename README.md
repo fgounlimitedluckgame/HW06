@@ -49,7 +49,25 @@
 
 ---
 
-## 4. Ghi chú
+## 4. Cách chạy collection: 
+- Trước khi chạy API, chạy backend trước băng lệnh `node server.js`
+- Chạy trên GUI:
+    - Chạy trước 2 API request trong folder `prerequisite folders` để lấy token user và admin
+    - Sau đó, chạy API trong folder `API Test suite` bằng cách đưa dữ liệu từ file `csv` vào trong test (dữ liệu có sẵn trong tập tin `test_data`)
+- Chạy trên CLI:
+    - Chạy trước lệnh `npm install -g newman newman-reporter-htmlextra` để có thể tạo newman report
+    - Chạy 2 api để lấy token user và admin:
+    ```bash
+    newman run hw06.postman_collection.json --folder "prerequisite folders" -e hw06.postman_environment.json --export-environment hw06.postman_environment.json
+    ```
+    - Chạy test suite và xuất newman report:
+    ```bash
+    newman run hw06.postman_collection.json --folder "API Test suite" -e hw06.postman_environment.json -d <đường dẫn file csv> -r cli -r htmlextra --reporter-htmlextra-export /reports/<tên báo cáo>.html
+    ```
+
+---
+
+## 5. Ghi chú
 - Chi tiết test case được lưu trong các workbook excel trong thư mục `workbooks`
 - Test data csv được lưu trong thư mục `test_data`
 - Biểu đồ và pseudocode được lưu trong thư mục `diagrams`
