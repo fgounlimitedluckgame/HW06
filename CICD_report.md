@@ -33,7 +33,7 @@ Pipeline CI/CD được thiết lập thông qua tệp tin `.github/workflows/ap
 
 ### 2.2. Kịch bản 2: Pipeline Run Phát Hiện Test Case Thất Bại 
 * **Mục đích:** Kiểm tra khả năng cảnh báo sớm của CI/CD khi phát hiện lỗi vi phạm nghiệp vụ hoặc hồi quy phần mềm.
-* **Mô tả commit:** ``
+* **Mô tả commit:** `ci: add failing tests`
 * **Kết quả:**
   * Newman phát hiện assertion thất bại 
   * Newman ghi nhận kết quả Fail trên giao diện Console và đánh dấu cảnh báo trên summary của GitHub Actions.
