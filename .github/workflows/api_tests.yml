@@ -36,7 +36,6 @@ jobs:
           npx wait-on tcp:3000 -t 30000
 
       - name: 5. Run Newman on CI Active Test Suites
-        continue-on-error: true
         run: |
           mkdir -p ./reports
           for file in ./ci_tests/*.csv; do
