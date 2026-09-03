@@ -8,7 +8,7 @@
 
 ## 1. Cấu hình CI/CD
 
-Pipeline CI/CD được thiết lập thông qua tệp tin `.github/workflows/api-tests.yml`, tự động kích hoạt mỗi khi có sự kiện `push` hoặc `pull_request` lên nhánh chính (`main`/`master`). CI/CD hỗ trợ kiểm thử thủ công qua `workflow-dispatch`
+Pipeline CI/CD được thiết lập thông qua tệp tin `.github/workflows/api_tests.yml`, tự động kích hoạt mỗi khi có sự kiện `push` hoặc `pull_request` lên nhánh chính (`main`/`master`). CI/CD hỗ trợ kiểm thử thủ công qua `workflow-dispatch`
 
 ### Các bước thực thi trong Pipeline:
 1. **Checkout Code:** Tải mã nguồn repository về môi trường máy ảo `ubuntu-latest`.

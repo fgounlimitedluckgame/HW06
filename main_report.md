@@ -116,7 +116,7 @@ flowchart TD
 
 ## 7. Tích hợp CI/CD:
 
-Cấu hình file CI/CD có thể được tìm thấy ở [api-tests-yml](.github/workflows/api-tests.yml)
+Cấu hình file CI/CD có thể được tìm thấy ở [api-tests-yml](.github/workflows/api_tests.yml)
 
 - **Luồng chạy:** Khi commit  `push` hoặc `pull_request` liên quan file CSV chứa API test case ở trong thư mục `api_tests`, GitHub Actions tự động dựng môi trường `ubuntu-latest`, cài đặt Node.js 20, khởi động backend EShop trong nền, đợi server sẵn sàng (`wait-on`), thực thi Newman CLI và upload artifact báo cáo HTML Extra.
 - **Hai kịch bản chạy (Sample Runs):**
