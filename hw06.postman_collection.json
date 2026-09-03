@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "0556cca7-724b-40e2-9085-dcc93f44cc42",
+    "name": "hw06",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57394754",
+    "_collection_link": "https://go.postman.co/collection/57394754-0556cca7-724b-40e2-9085-dcc93f44cc42?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "prerequisite folders",
+      "item": [
+        {
+          "name": "user token",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"User login successful\", function () {\r\n    pm.response.to.have.status(200);\r\n    const jsonData = pm.response.json();\r\n    pm.environment.set(\"user_token\", jsonData.token);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"test@eshop.com\", \"password\": \"Test1234!\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "admin token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Admin login successful\", function () {\r\n    pm.response.to.have.status(200);\r\n    const jsonData = pm.response.json();\r\n    pm.environment.set(\"admin_token\", jsonData.token);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"admin@eshop.com\", \"password\": \"Admin123!\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Run the eshop-sut backend first before running everything"
+    },
+    {
+      "name": "API Test suite",
+      "item": [
+        {
+          "name": "test cases",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// 1. Get base URL and CSV endpoint column\r",
+                  "const baseUrl = (pm.environment.get(\"base_url\") || pm.collectionVariables.get(\"base_url\") || \"http://localhost:3000\").replace(/\\/+$/, \"\");\r",
+                  "let endpoint = pm.iterationData.get(\"endpoint\") || \"/api/register\";\r",
+                  "\r",
+                  "// 2. Resolve {{new_product_id}} placeholder if present in endpoint\r",
+                  "const currentId = pm.environment.get(\"new_product_id\") || \"1\";\r",
+                  "if (typeof endpoint === \"string\" && endpoint.includes(\"{{new_product_id}}\")) {\r",
+                  "    endpoint = endpoint.replace(\"{{new_product_id}}\", currentId);\r",
+                  "}\r",
+                  "\r",
+                  "// Ensure proper slash prefix\r",
+                  "const cleanEndpoint = endpoint.startsWith(\"/\") ? endpoint : `/${endpoint}`;\r",
+                  "\r",
+                  "// 3. Set the request URL & HTTP method\r",
+                  "pm.request.url.update(`${baseUrl}${cleanEndpoint}`);\r",
+                  "\r",
+                  "const csvMethod = pm.iterationData.get(\"method\");\r",
+                  "if (csvMethod) {\r",
+                  "    pm.request.method = String(csvMethod).toUpperCase();\r",
+                  "}\r",
+                  "\r",
+                  "// 4. Inject Student ID header\r",
+                  "pm.request.headers.upsert({\r",
+                  "    key: 'X-Student-Id',\r",
+                  "    value: '23127108'\r",
+                  "});\r",
+                  "\r",
+                  "// 5. Inject Authorization header\r",
+                  "let rawAuth = pm.iterationData.get(\"auth_header\");\r",
+                  "if (rawAuth !== undefined && rawAuth !== null && rawAuth !== \"\") {\r",
+                  "    rawAuth = String(rawAuth);\r",
+                  "    const adminToken = pm.environment.get(\"admin_token\") || \"\";\r",
+                  "    const userToken = pm.environment.get(\"user_token\") || \"\";\r",
+                  "\r",
+                  "    if (rawAuth.includes(\"{{admin_token}}\")) {\r",
+                  "        rawAuth = rawAuth.replace(\"{{admin_token}}\", adminToken);\r",
+                  "    }\r",
+                  "    if (rawAuth.includes(\"{{user_token}}\")) {\r",
+                  "        rawAuth = rawAuth.replace(\"{{user_token}}\", userToken);\r",
+                  "    }\r",
+                  "\r",
+                  "    pm.request.headers.upsert({\r",
+                  "        key: 'Authorization',\r",
+                  "        value: rawAuth\r",
+                  "    });\r",
+                  "} else {\r",
+                  "    pm.request.headers.remove('Authorization');\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const testId = pm.iterationData.get(\"test_id\");\r",
+                  "const category = pm.iterationData.get(\"category\");\r",
+                  "const expectedStatus = parseInt(pm.iterationData.get(\"expected_status\"), 10);\r",
+                  "\r",
+                  "// 1. Status Code Validation\r",
+                  "pm.test(`[${testId}][${category}] Expect HTTP ${expectedStatus}`, function () {\r",
+                  "    if (expectedStatus === 400 || expectedStatus === 409) {\r",
+                  "        pm.expect(pm.response.code).to.be.oneOf([400, 409, 422]);\r",
+                  "    } else {\r",
+                  "        pm.response.to.have.status(expectedStatus);\r",
+                  "    }\r",
+                  "});\r",
+                  "\r",
+                  "// 2. Persist IDs for State Transitions\r",
+                  "const method = pm.request.method.toUpperCase();\r",
+                  "\r",
+                  "if (pm.response.code === 200 || pm.response.code === 204) {\r",
+                  "    // 2a. Capture created ID from POST response body\r",
+                  "    if (method === \"POST\") {\r",
+                  "        try {\r",
+                  "            const body = pm.response.json();\r",
+                  "            if (body && body.id) {\r",
+                  "                pm.environment.set(\"new_product_id\", body.id);\r",
+                  "            }\r",
+                  "        } catch (e) {\r",
+                  "            // Non-JSON response\r",
+                  "        }\r",
+                  "    }\r",
+                  "\r",
+                  "    // 2b. Capture deleted ID from the DELETE request URL path\r",
+                  "    if (method === \"DELETE\") {\r",
+                  "        // Extracts the trailing ID segment from URLs like /api/products/123\r",
+                  "        const pathSegments = pm.request.url.path;\r",
+                  "        const targetId = pathSegments[pathSegments.length - 1];\r",
+                  "\r",
+                  "        if (targetId && !isNaN(targetId)) {\r",
+                  "            pm.environment.set(\"deleted_product_id\", targetId);\r",
+                  "        } else {\r",
+                  "            // Fallback: If the path used {{new_product_id}}, clone it over\r",
+                  "            const currentNewId = pm.environment.get(\"new_product_id\");\r",
+                  "            if (currentNewId) {\r",
+                  "                pm.environment.set(\"deleted_product_id\", currentNewId);\r",
+                  "            }\r",
+                  "        }\r",
+                  "    }\r",
+                  "}\r",
+                  "\r",
+                  "// 3. Custom Assertion Script Execution from CSV\r",
+                  "const customScript = pm.iterationData.get(\"assertion_script\");\r",
+                  "if (customScript && customScript.trim() !== \"\") {\r",
+                  "    pm.test(`[${testId}] Custom Assertions`, function () {\r",
+                  "        try {\r",
+                  "            eval(customScript);\r",
+                  "        } catch (err) {\r",
+                  "            console.error(`Error executing script for ${testId}:`, err);\r",
+                  "            pm.expect.fail(`Script execution error: ${err.message}`);\r",
+                  "        }\r",
+                  "    });\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "{{auth_header}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{payload}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}{{endpoint}}",
+              "host": [
+                "{{base_url}}{{endpoint}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "pm.request.headers.add({\r",
+          "    key: 'X-Student-Id',\r",
+          "    value: pm.variables.get('student_id')\r",
+          "});"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ]
+}
