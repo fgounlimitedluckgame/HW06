@@ -33,7 +33,7 @@ jobs:
         run: |
           node server.js &
           echo "Waiting for backend to initialize..." 
-          npx wait-on http://localhost:3000 -t 30000
+          npx wait-on tcp:3000 -t 30000
 
       - name: 5. Run Newman on CI Active Test Suites
         continue-on-error: true
