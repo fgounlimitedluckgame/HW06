@@ -37,8 +37,7 @@ flowchart TD
     end
 
     subgraph Post_Processing [Stage 3: Synthesis & Verification]
-        F1 & F2 & F3 & F4 --> G[Tổng hợp và & Khử trùng lắp]
-        G --> H[Con người kiểm tra]
+        F1 & F2 & F3 & F4 --> H[Con người kiểm tra]
         H --> I{Hợp lệ?}
         I -- Không --> E[Giữ lại để audit]
         I -- Có --> J[Đưa lên postman/newman]
