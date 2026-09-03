@@ -28,17 +28,14 @@ jobs:
           npm ci
           npm install -g newman newman-reporter-htmlextra
 
-      - name: 4. Launch SUT Server in Background
+      - name: 4. Launch SUT Server in Background 
         working-directory: ./eshop-sut/backend
         run: |
           node server.js &
-
-      - name: 5. Wait for SUT Server Readiness
-        working-directory: ./eshop-sut/backend
-        run: |
+          echo "Waiting for backend to initialize..." 
           npx wait-on http://localhost:3000 -t 30000
 
-      - name: 6. Run Newman on CI Active Test Suites
+      - name: 5. Run Newman on CI Active Test Suites
         continue-on-error: true
         run: |
           mkdir -p ./reports
@@ -54,7 +51,7 @@ jobs:
               --reporter-htmlextra-export "./reports/${suite_name}-report.html"
           done
 
-      - name: 7. Archive Test Report Artifacts
+      - name: 6. Archive Test Report Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
