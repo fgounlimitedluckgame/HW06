@@ -14,12 +14,10 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 - **Cách thực hiện:** Thực hiện đăng ký một tài khoản, hoặc thêm một đơn hàng, hoặc thêm một sản phẩm
 - **Kết quả mong đợi:** 201 Created
 - **Kết quả thực tế:** 200 OK
-
 - **Mức độ nghiêm trọng:** Low, vì nó chỉ không đúng với tiêu chuẩn của HTML (lưu ý: test case dùng 200 OK thay vì 201 Created để tránh tạo false positive)
 
-<img width="1399" height="466" alt="Image" src="https://github.com/user-attachments/assets/807a5ec5-9c43-4304-a6ba-1e78003c565f" />
-
-<img width="1379" height="417" alt="Image" src="https://github.com/user-attachments/assets/f4caf13b-9aae-4d57-9511-4c8cca46406a" />
+![200 instead of 201](bug_screenshots/200%20instead%20of%20201.png)
+![200 part 2](bug_screenshots/200%20part%202.png)
 
 ---
 
@@ -31,11 +29,10 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 - **Kết quả thực tế:** 200 OK
 - **Mức độ nghiêm trọng:** Severe
 
-<img width="743" height="752" alt="Image" src="https://github.com/user-attachments/assets/e1509194-ad80-4948-bdac-875b1cb81a54" />
+![escalation 1](bug_screenshots/escalation%201.png)
+![escalation 2](bug_screenshots/escalation%202.png)
+![escalation 3](bug_screenshots/escalation%203.png)
 
-<img width="752" height="735" alt="Image" src="https://github.com/user-attachments/assets/3d549b97-360f-4bbc-bc71-452aed9f4680" />
-
-<img width="762" height="762" alt="Image" src="https://github.com/user-attachments/assets/745004fd-73c2-4780-b92c-71fc014ed7f6" />
 
 ---
 
@@ -47,11 +44,9 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 - **Kết quả thực tế:** 200 OK
 - **Mức độ nghiêm trọng:** Severe
 
-<img width="743" height="752" alt="Image" src="https://github.com/user-attachments/assets/e1509194-ad80-4948-bdac-875b1cb81a54" />
-
-<img width="752" height="735" alt="Image" src="https://github.com/user-attachments/assets/3d549b97-360f-4bbc-bc71-452aed9f4680" />
-
-<img width="762" height="762" alt="Image" src="https://github.com/user-attachments/assets/745004fd-73c2-4780-b92c-71fc014ed7f6" />
+![wrong schema 1](bug_screenshots/wrong%20schema%201.png)
+![wrong schema 2](bug_screenshots/wrong%20schema%202.png)
+![wrong schema 3](bug_screenshots/wrong%20schema%203.png)
 
 ---
 
@@ -65,9 +60,9 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 
 - **Minh hoạ issue trong test case đăng ký:**
 
-<img width="745" height="715" alt="Image" src="https://github.com/user-attachments/assets/319001b8-5c55-403d-9d32-c6dfa82c3df2" />
-<img width="731" height="730" alt="Image" src="https://github.com/user-attachments/assets/52932bbc-e7a1-46d4-a21d-cb743ea4529a" />
-<img width="760" height="757" alt="Image" src="https://github.com/user-attachments/assets/7817c1b6-5bbe-4f35-9422-99dec868c269" />
+![invalid json body 1](bug_screenshots/invalid%20JSON%20body.png)
+![invalid json body 2](bug_screenshots/invalid%20JSON%202.png)
+![invalid json body 3](bug_screenshots/invalid%20JSON%203.png)
 
 --- 
 
@@ -80,7 +75,7 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 - **Mức độ nghiêm trọng:** Severe
 
 
-<img width="1435" height="955" alt="Image" src="https://github.com/user-attachments/assets/2386bcd1-945c-488c-878b-87b9bd375871" />
+![invalid bearer](bug_screenshots/invalid%20bearer%20accepted.png)
 
 ---
 
@@ -94,8 +89,8 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 
 - **Hình ảnh minh hoạ về lỗi nhập liệu ở `/api/register:`**
 
-<img width="1447" height="950" alt="Image" src="https://github.com/user-attachments/assets/e634a9af-5342-414e-884b-a177a9b8a24d" />
-<img width="1391" height="353" alt="Image" src="https://github.com/user-attachments/assets/d147c7a3-8991-4bc6-801c-c8f81e621e4e" />
+![wrong input](bug_screenshots/wrong%20input.png)
+![wrong input 2](bug_screenshots/wrong%20input%202.png)
 
 ---
 
@@ -107,8 +102,8 @@ Khi thực hiện một API request dạng tạo mới, khi request được th�
 - **Kết quả thực tế:** 200 OK
 - **Mức độ nghiêm trọng:** Severe
 
-<img width="1346" height="825" alt="Image" src="https://github.com/user-attachments/assets/99e7c9ca-ec72-4cf3-8e29-e43485d11839" />
-<img width="1360" height="414" alt="Image" src="https://github.com/user-attachments/assets/805c42da-29a2-45a0-a5ea-bff2ee5043ec" />
+![duplicate email](bug_screenshots/duplicate%20email.png)
+![duplicate email body](bug_screenshots/duplicate%20email%20body.png)
 
 
 
