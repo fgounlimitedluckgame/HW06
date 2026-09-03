@@ -18,7 +18,7 @@
 | **Pool C**  |     FR-15     | `/api/categories`        |   `POST`, `PUT`, `DELETE`    | Quản lý sản phẩm (Dành cho Admin) |
 
 ## 2. Quy trình thực hiện AI test generator:
-* Flow chart
+* **Flow chart:** (lưu trong [flowchart.md](diagrams/flowchart.md))
 ```mermaid
 flowchart TD
     subgraph SUT_Input [Stage 1: SUT Specification]
@@ -58,7 +58,7 @@ flowchart TD
     - Các test case được sinh ra sẽ được người dùng kiểm tra lại trước khi đưa lên Postman/Newman
     - Người dùng thực hiện các test case, sinh test report, báo cáo lỗi trên github issues
 
-* Pseudocode: [pseudocode.py](pseudocode.py) 
+* Pseudocode: [diagrams/pseudocode.py](diagrams/pseudocode.py) 
 
 ## 3. Các tính năng Postman đã sử dụng:
 1. **Workspace & Collections:** Tổ chức suite test
@@ -113,7 +113,7 @@ flowchart TD
 
 ## 6. Báo cáo lỗi
 
-Đọc chi tiết tại [bug_report.md](bug_report.md) (đường dẫn: `bug_report.md`)
+Đọc chi tiết tại [bug_report.md](bug_report.md)
 
 ## 7. Tích hợp CI/CD:
 
