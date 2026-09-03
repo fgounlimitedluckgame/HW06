@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          cache-dependency-path: ./eshop-sut/backend/package-lock.json
 
       - name: 3. Install SUT Dependencies & Global Newman Runner
         run: |
@@ -27,13 +28,12 @@ jobs:
           npm install -g newman newman-reporter-htmlextra
 
       - name: 4. Launch SUT Server in Background
+        working-directory: ./eshop-sut/backend
         run: |
-          npm start &
-        env:
-          PORT: 3000
-          NODE_ENV: test
+          node server.js &
 
       - name: 5. Wait for SUT Server Readiness
+        working-directory: ./eshop-sut/backend
         run: |
           npx wait-on http://localhost:3000 -t 30000
 
