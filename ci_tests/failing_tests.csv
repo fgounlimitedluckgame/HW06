@@ -1,4 +1,0 @@
-﻿test_id,category,method,endpoint,payload,auth_header,expected_status,schema_validation,,assertion_script
-FR07-PT-001,Partition,POST,/api/cart,"{""id"": 1, ""name"": ""Sản phẩm A"", ""price"": 100000, ""quantity"": 1}",Bearer {{user_token}},200,"{""message"": ""string""}",,
-FR07-PT-003,Partition,POST,/api/cart,"{""id"": 0, ""name"": ""Sản phẩm A"", ""price"": 100000, ""quantity"": 1}",Bearer {{user_token}},400,"{""error"": ""string""}",,
-FR07-PT-004,Partition,POST,/api/cart,"{""id"": -5, ""name"": ""Sản phẩm A"", ""price"": 100000, ""quantity"": 1}",Bearer {{user_token}},400,"{""error"": ""string""}",,
